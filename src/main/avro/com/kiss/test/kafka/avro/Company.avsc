@@ -1,0 +1,26 @@
+{"namespace": "com.kiss.formation.kafka.avro",
+    "type": "record", "name": "Company",
+    "fields": [
+        {"name": "name", "type": "string"},
+        {"name": "firstName", "type": "string"},
+        {"name": "lastName", "type": "string"},
+        {"name": "yearOfCreation", "type": "int"},
+        {"name": "phoneNumber", "type": ["null", "string"], "default" : null},
+
+        {"name": "address",  "type":
+          [ "null",
+            { "type": "record",   "name": "Address",
+            "fields": [
+              {"name": "address1", "type": "string"},
+              {"name": "address2", "type": ["null", "string"], "default" : null},
+              {"name": "zipCode", "type": "int"},
+              {"name": "city", "type": "string"}
+            ]
+            }
+        ], "default" : null
+        },
+        {"name":"status", "default" :"DRAFT", "type": { "type": "enum", "name": "Status",
+                  "symbols" : ["DRAFT", "ACTIVE", "DELETED"]}
+        }
+    ]
+}
