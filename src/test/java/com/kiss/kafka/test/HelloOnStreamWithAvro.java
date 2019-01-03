@@ -47,7 +47,7 @@ public class HelloOnStreamWithAvro {
         // Connection
         config.put(StreamsConfig.APPLICATION_ID_CONFIG, HelloOnStreamWithAvro.class.getSimpleName());
         config.put(StreamsConfig.BOOTSTRAP_SERVERS_CONFIG, bootstrapServers);
-        config.put("schema.registry.url", registryUrl);
+        config.put(AbstractKafkaAvroSerDeConfig.SCHEMA_REGISTRY_URL_CONFIG, registryUrl);
 
         // Serialization
         config.put(StreamsConfig.DEFAULT_KEY_SERDE_CLASS_CONFIG, Serdes.String().getClass());
@@ -55,7 +55,7 @@ public class HelloOnStreamWithAvro {
 
 
         // When you want to override serdes explicitly/selectively
-        final Map<String, String> serdeConfig = Collections.singletonMap("schema.registry.url",
+        final Map<String, String> serdeConfig = Collections.singletonMap(AbstractKafkaAvroSerDeConfig.SCHEMA_REGISTRY_URL_CONFIG,
                 registryUrl);
         final SpecificAvroSerde<Company> companyAvroSerde = new SpecificAvroSerde<>();
         companyAvroSerde.configure(serdeConfig, false);
